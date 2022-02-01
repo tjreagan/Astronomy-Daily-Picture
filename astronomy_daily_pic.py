@@ -13,7 +13,6 @@ def get_filename(filename):
 
     return os.path.join(directory, filename)
 
-
 def download_pic():
     r = requests.get(url)
 
