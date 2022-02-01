@@ -2,6 +2,7 @@ import requests
 import pwd
 import os
 from datetime import datetime
+from pathlib import Path
 
 url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
 
@@ -25,6 +26,7 @@ def download_pic():
 
     if "jpg" not in picture_url:
         print("No image today. Must be a video.")
+        return
     else:
         pic = requests.get(picture_url, allow_redirects=True)
     
@@ -32,8 +34,13 @@ def download_pic():
     date_string = todays_date.strftime("%m-%d-%Y")
     jpg_name = date_string + ".jpg"
     filename = get_filename(jpg_name)
+    pathName = Path(filename)
 
-    open(filename, "wb").write(pic.content)
-    print(f"Picture of the day saved to {filename}")
+    if pathName.exists():
+        print("File already exists!!!!!!!!!!")
+        return
+    else:
+        open(filename, "wb").write(pic.content)
+        print(f"Picture of the day saved to {filename}")
 
 download_pic()
