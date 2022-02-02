@@ -42,4 +42,8 @@ def download_pic():
         open(filename, "wb").write(pic.content)
         print(f"Picture of the day saved to {filename}")
 
-download_pic()
+def main():
+    download_pic()
+
+if __name__ == "__main__":
+    main()
